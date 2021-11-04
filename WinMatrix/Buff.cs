@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using static System.Console;
+using static WinMatrix.Strings;
 
 namespace WinMatrix
 {
@@ -10,7 +11,7 @@ namespace WinMatrix
         public static object[,] Grid { get; set; } = new object[WindowHeight - 1, WindowWidth - 1];
 
         // Populate buffer with whitespace to create default grid
-        public static void Populate(string defaultCharacter = " ")
+        public static void Populate(char defaultCharacter = ' ')
         {
             for (int i = 0; i < Grid.GetLength(0); i++)
             {
