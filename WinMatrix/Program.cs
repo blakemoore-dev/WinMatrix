@@ -22,15 +22,41 @@ namespace WinMatrix
             ForegroundColor = ConsoleColor.Cyan;
             CursorVisible = false;
 
-            for (int i = 0; i < 10; i++)
+            while (true) // TODO: Abstract to method or class
             {
-                SetCursorPosition(0, i);
-                Thread.Sleep(20);
-                Console.WriteLine((char)rand.Next(32, 126));
+                for (int i = 0; i < WindowHeight; i++)
+                {
+                    for (int j = 0; j < WindowHeight - 1; j++)
+                    {
+                        var randStr = GenerateCascade();
+
+                        var curPos = GetCursorPosition();
+
+                        if (curPos.Top == WindowHeight - 1)
+                        {
+                            j = 1;
+                        }
+
+                        // Trailing chars
+                        SetCursorPosition(0, j);
+                        ForegroundColor = ConsoleColor.Cyan;
+                        WriteLine(randStr[j]);
+
+                        // Head char
+                        SetCursorPosition(0, j + 1);
+                        ForegroundColor = ConsoleColor.White;
+                        WriteLine((char)rand.Next(33,126));
+                        Thread.Sleep(100); // <<<<< TODO: Delay variable
+                    }
+                }
             }
 
-            ReadKey();
-            ResetColor();
+            //while (true)
+            //{
+            //    var test = GenerateCascade();
+            //    Console.WriteLine(test + '|');
+            //    Thread.Sleep(100);
+            //}
         }
     }
 }
